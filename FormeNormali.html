@@ -1,0 +1,327 @@
+<!-- Definizione del tipo di documento HTML -->
+<!DOCTYPE html>
+<!-- Inizio del documento HTML -->
+<html lang="it">
+<!-- Intestazione del documento, include metadati e collegamenti agli stili -->
+<head>
+<!-- Imposta la codifica dei caratteri su UTF-8 -->
+    <meta charset="UTF-8">
+<!-- Rende il layout responsivo sui dispositivi mobili -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Titolo della pagina visualizzato nella scheda del browser -->
+    <title>Forme Normali - Esercizio</title>
+<!-- Stile CSS incorporato per la formattazione della pagina -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .example {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<!-- Corpo principale della pagina, contiene il contenuto visibile -->
+<body>
+<!-- Titolo principale della pagina -->
+    <h1>Forme Normali - Esercizio</h1>
+    <p>
+        Le forme normali sono regole utilizzate per normalizzare le tabelle nei database relazionali al fine di ridurre la ridondanza e migliorare l'integrità dei dati. 
+        Di seguito vengono spiegate le prime tre forme normali (1NF, 2NF e 3NF) con esempi pratici.
+    </p>
+    
+<!-- Inizio di una sezione che spiega una forma normale specifica -->
+    <div class="example">
+<!-- Titolo di una specifica forma normale -->
+        <h2>1ª Forma Normale (1NF)</h2>
+        <p>
+            Una tabella è in 1NF se ogni colonna contiene valori atomici e ogni riga è unica.
+        </p>
+        <h3>Tabella Non in 1NF</h3>
+<!-- Tabella che mostra i dati di esempio per spiegare la normalizzazione -->
+        <table>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Intestazione di colonna della tabella -->
+                <th>ID Studente</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>Nome</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>Corsi</th>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>1</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Mario Rossi</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Matematica, Fisica</td>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>2</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Anna Bianchi</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Chimica</td>
+            </tr>
+        </table>
+        <h3>Tabella in 1NF</h3>
+<!-- Tabella che mostra i dati di esempio per spiegare la normalizzazione -->
+        <table>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Intestazione di colonna della tabella -->
+                <th>ID Studente</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>Nome</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>Corso</th>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>1</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Mario Rossi</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Matematica</td>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>1</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Mario Rossi</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Fisica</td>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>2</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Anna Bianchi</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Chimica</td>
+            </tr>
+        </table>
+<!-- Fine della sezione specifica -->
+    </div>
+
+<!-- Inizio di una sezione che spiega una forma normale specifica -->
+    <div class="example">
+<!-- Titolo di una specifica forma normale -->
+        <h2>2ª Forma Normale (2NF)</h2>
+        <p>
+            Una tabella è in 2NF se è già in 1NF e ogni colonna dipende interamente dalla chiave primaria.
+        </p>
+        <h3>Tabella Non in 2NF</h3>
+<!-- Tabella che mostra i dati di esempio per spiegare la normalizzazione -->
+        <table>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Intestazione di colonna della tabella -->
+                <th>ID Corso</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>Nome Corso</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>ID Studente</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>Nome Studente</th>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>101</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Matematica</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>1</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Mario Rossi</td>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>102</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Fisica</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>1</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Mario Rossi</td>
+            </tr>
+        </table>
+        <h3>Normalizzata in 2NF</h3>
+        <h4>Tabella Studenti</h4>
+<!-- Tabella che mostra i dati di esempio per spiegare la normalizzazione -->
+        <table>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Intestazione di colonna della tabella -->
+                <th>ID Studente</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>Nome Studente</th>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>1</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Mario Rossi</td>
+            </tr>
+        </table>
+        <h4>Tabella Corsi</h4>
+<!-- Tabella che mostra i dati di esempio per spiegare la normalizzazione -->
+        <table>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Intestazione di colonna della tabella -->
+                <th>ID Corso</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>Nome Corso</th>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>101</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Matematica</td>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>102</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Fisica</td>
+            </tr>
+        </table>
+        <h4>Tabella Iscrizioni</h4>
+<!-- Tabella che mostra i dati di esempio per spiegare la normalizzazione -->
+        <table>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Intestazione di colonna della tabella -->
+                <th>ID Studente</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>ID Corso</th>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>1</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>101</td>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>1</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>102</td>
+            </tr>
+        </table>
+<!-- Fine della sezione specifica -->
+    </div>
+
+<!-- Inizio di una sezione che spiega una forma normale specifica -->
+    <div class="example">
+<!-- Titolo di una specifica forma normale -->
+        <h2>3ª Forma Normale (3NF)</h2>
+        <p>
+            Una tabella è in 3NF se è già in 2NF e ogni colonna non chiave è indipendente da qualsiasi altra colonna non chiave.
+        </p>
+        <h3>Tabella Non in 3NF</h3>
+<!-- Tabella che mostra i dati di esempio per spiegare la normalizzazione -->
+        <table>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Intestazione di colonna della tabella -->
+                <th>ID Studente</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>Nome</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>CAP</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>Città</th>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>1</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Mario Rossi</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>00100</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Roma</td>
+            </tr>
+        </table>
+        <h3>Normalizzata in 3NF</h3>
+        <h4>Tabella Studenti</h4>
+<!-- Tabella che mostra i dati di esempio per spiegare la normalizzazione -->
+        <table>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Intestazione di colonna della tabella -->
+                <th>ID Studente</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>Nome</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>CAP</th>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>1</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Mario Rossi</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>00100</td>
+            </tr>
+        </table>
+        <h4>Tabella Città</h4>
+<!-- Tabella che mostra i dati di esempio per spiegare la normalizzazione -->
+        <table>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Intestazione di colonna della tabella -->
+                <th>CAP</th>
+<!-- Intestazione di colonna della tabella -->
+                <th>Città</th>
+            </tr>
+<!-- Riga della tabella -->
+            <tr>
+<!-- Cella della tabella contenente i dati -->
+                <td>00100</td>
+<!-- Cella della tabella contenente i dati -->
+                <td>Roma</td>
+            </tr>
+        </table>
+<!-- Fine della sezione specifica -->
+    </div>
+<p><a href="quaderno_informatica_SALONGA.html">Torna al Quaderno di Informatica</a></p>
+<!-- Fine del corpo della pagina -->
+</body>
+<!-- Fine del documento HTML -->
+</html>
