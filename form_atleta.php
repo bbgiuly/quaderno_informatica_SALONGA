@@ -3,7 +3,7 @@
 $servername = "localhost";  // server MySQL, per XAMPP è localhost
 $username = "root";         // nome utente MySQL, per XAMPP è root
 $password = "";             // password, per XAMPP è vuota di default
-$dbname = "atletica";       // il nome del tuo database
+$dbname = "atletica_db";    // il nome del tuo database
 
 // Crea la connessione
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -45,11 +45,18 @@ if ($conn->connect_error) {
     SELECT g.ID_gara, g.nome AS gara_nome, g.citta, g.data, 
            a.cognome AS atleta_cognome, a.nome AS atleta_nome, 
            a.cod_fiscale, a.data_nascita, c.descrizione AS categoria, 
-           s.descrizione AS squadra
+           s.descrizione AS squadra, 
+           CASE 
+               WHEN COUNT(am.ID_ammonizione) >= 3 THEN 'Squalificato'
+               ELSE 'Non squalificato'
+           END AS squalificato
     FROM gare g
-    LEFT JOIN atleti a ON a.ID_categoria = g.ID_categoria
+    LEFT JOIN atleti_gare ag ON g.ID_gara = ag.ID_gara
+    LEFT JOIN atleti a ON ag.ID_atleta = a.ID_atleta
     LEFT JOIN categorie c ON a.ID_categoria = c.ID_categoria
-    LEFT JOIN squadre s ON a.ID_squadra = s.ID_squadra";
+    LEFT JOIN squadre s ON a.ID_squadra = s.ID_squadra
+    LEFT JOIN ammonizioni am ON am.ID_atleta = a.ID_atleta AND am.ID_gara = g.ID_gara
+    GROUP BY g.ID_gara, a.ID_atleta";
     
     // Esegui la query
     $result = $conn->query($sql);
@@ -59,7 +66,7 @@ if ($conn->connect_error) {
         if ($result->num_rows > 0) {
             // Se ci sono risultati, crea una tabella HTML per mostrarli
             echo "<table>";
-            echo "<tr><th>ID Gara</th><th>Nome Gara</th><th>Città</th><th>Data</th><th>Atleta</th><th>Codice Fiscale</th><th>Data di Nascita</th><th>Categoria</th><th>Squadra</th></tr>";
+            echo "<tr><th>ID Gara</th><th>Nome Gara</th><th>Città</th><th>Data</th><th>Atleta</th><th>Codice Fiscale</th><th>Data di Nascita</th><th>Categoria</th><th>Squadra</th><th>Squalifica</th></tr>";
 
             // Cicla attraverso i risultati e mostra i dati
             while ($row = $result->fetch_assoc()) {
@@ -67,12 +74,13 @@ if ($conn->connect_error) {
                         <td>" . htmlspecialchars($row["ID_gara"]) . "</td>
                         <td>" . htmlspecialchars($row["gara_nome"]) . "</td>
                         <td>" . htmlspecialchars($row["citta"]) . "</td>
-                        <td>" . htmlspecialchars($row["data"]) . "</td>
+                        <td>" . date("d-m-Y", strtotime($row["data"])) . "</td>
                         <td>" . htmlspecialchars($row["atleta_nome"]) . " " . htmlspecialchars($row["atleta_cognome"]) . "</td>
                         <td>" . htmlspecialchars($row["cod_fiscale"]) . "</td>
-                        <td>" . htmlspecialchars($row["data_nascita"]) . "</td>
+                        <td>" . date("d-m-Y", strtotime($row["data_nascita"])) . "</td>
                         <td>" . htmlspecialchars($row["categoria"]) . "</td>
                         <td>" . htmlspecialchars($row["squadra"]) . "</td>
+                        <td>" . htmlspecialchars($row["squalificato"]) . "</td>
                     </tr>";
             }
 
@@ -89,15 +97,17 @@ if ($conn->connect_error) {
     $conn->close();
     ?>
 
-    <p>🔙 <a href="index.html">Torna all'indice</a></p>
+<p>🔙 <a href="quaderno_informatica_SALONGA.html">Torna all'indice</a></p>
 
-    <footer>
-        <hr>
-        <p>📌 Info progetto:</p>
-        <p>👤 Nome: Giuliana</p>
-        <p>📝 Cognome: Salonga</p>
-        <p>© 2025 - Tutti i diritti riservati.</p>
-    </footer>
+<footer>
+    <hr>
+    <p>📌 Info project:</p>
+    <p>👤 Nome: Giuliana</p>
+    <p>📝 Cognome: Salonga</p>
+    <p>© 2025 - Tutti i diritti riservati.</p>
+</footer>
 
 </body>
 </html>
+
+
